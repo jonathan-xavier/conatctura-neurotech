@@ -1,4 +1,48 @@
 <app-navbar></app-navbar>
-<div>
-  <button mat-raised-button color="primary" (click)="createUser()">Novo Usuário</button>
-</div>
+<section class="buttons">
+  <div class="container-title">
+    <h1>USUÁRIOS</h1>
+  </div>
+</section>
+<!-- Botao de adicionar contato -->
+<section>
+  <div class="container-buttons">
+   
+    <button mat-raised-button color="primary" (click)="createUser()">Novo Usuário</button>
+  </div>
+  
+    
+  
+</section>
+
+<!-- tabela de lista de contatos -->
+<section>
+  <div>
+    <table>
+      <!-- thead -->
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Username</th>
+          <th scope="col">admin</th>
+          <th scope="col">Menu</th>
+        </tr>
+      </thead>
+      <!-- tbody -->
+        <tbody>
+          <tr *ngFor = "let user of userList">
+            <td data-label="Nome">{{user.name}}</td>
+            <td data-label="Nome">{{user.username}}</td>
+            <td data-label="Nome">{{user.admin}}</td>
+            <td>
+              <div class="container_buttons_table">
+                <mat-icon (click)="deleteUsers(user)">delete</mat-icon>
+                <mat-icon (click)="editUsers(user)" >edit</mat-icon>
+              </div>
+            </td>
+
+          </tr>
+        </tbody>
+    </table>
+  </div>
+</section>

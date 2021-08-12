@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<section>
+<section class="buttons">
   <div class="container-title">
     <h1>CONTATOS</h1>
   </div>
@@ -8,7 +8,11 @@
 <section>
   <div class="container-buttons">
     <button  mat-raised-button color="primary" (click)="createContact()">Novo contato</button>
+    <button mat-raised-button color="primary" (click)="createUser()">Novo Usuário</button>
   </div>
+  
+    
+  
 </section>
 
 <!-- tabela de lista de contatos -->
@@ -30,7 +34,12 @@
             <td data-label="Nome">{{contact.name}}</td>
             <td data-label="Nome">{{contact.email}}</td>
             <td data-label="Nome">{{contact.phone}}</td>
-            <td>menu</td>
+            <td>
+              <div class="container_buttons_table">
+                <mat-icon (click)="deleteContacts(contact)">delete</mat-icon>
+                <mat-icon (click)="editContacts(contact)">edit</mat-icon>
+              </div>
+            </td>
 
           </tr>
         </tbody>

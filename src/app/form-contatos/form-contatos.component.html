@@ -6,27 +6,28 @@
 </section>
 
 <section>
-  <form class="container">
+  <form class="container" [formGroup]="formContatos">
       <div class="col-2">
         <div class="item1">
           <label for="nome">Nome:</label>
-          <input type="text" name="nome" class="form-control"> 
+          <input formControlName="name" type="text" name="nome" class="form-control"> 
         </div>
 
         <div class="item2">
           <label for="nome">Email:</label>
-          <input type="text" name="nome" class="form-control"> 
+          <input formControlName="email" type="text" name="nome" class="form-control"> 
         </div>
 
       </div>
 
       <div class="item">
         <label for="nome">Phone:</label>
-        <input type="text" name="nome" class="form-control"> 
+        <input formControlName="phone" type="text" name="nome" class="form-control"> 
       </div>
 
       <div class="button">
-        <button mat-raised-button color="primary">Salvar contato</button>
+        <button (click)="save()" mat-raised-button color="primary">Salvar contato</button>
+        <button (click)="resetar()" mat-raised-button color="primary">Limpar</button>
       </div>
 
 

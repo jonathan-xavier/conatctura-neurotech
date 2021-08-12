@@ -6,26 +6,26 @@
 </section>
 
 <section>
-  <form class="container">
+  <form class="container" [formGroup]="formUsers">
       <div class="col-2">
         <div class="item1">
           <label for="nome">Email:</label>
-          <input type="email" name="nome" class="form-control"> 
+          <input formControlName="username" type="email" name="nome" class="form-control"> 
         </div>
 
         <div class="item2">
           <label for="nome">Senha:</label>
-          <input type="text" name="nome" class="form-control"> 
+          <input formControlName="password" type="text" name="nome" class="form-control"> 
         </div>
 
         <!-- outros itens -->
         <div class="item3">
           <label for="nome">Nome:</label>
-          <input type="text" name="nome" class="form-control"> 
+          <input formControlName="name" type="text" name="nome" class="form-control"> 
         </div>
         <div class="item4">
-          <input type="checkbox" name="nome"> 
-          <label for="nome" >Administrador:</label>
+          <input formControlName="admin" type="checkbox" name="nome"> 
+          <label  for="nome" >Administrador:</label>
         </div>
 
       </div>
@@ -35,7 +35,8 @@
  
 
       <div class="button">
-        <button mat-raised-button color="primary">Salvar contato</button>
+        <button  (click)="save()"mat-raised-button color="primary">Salvar usuario</button>
+        <button  (click)="limpar()"mat-raised-button color="primary">Limpar</button>
       </div>
 
 
