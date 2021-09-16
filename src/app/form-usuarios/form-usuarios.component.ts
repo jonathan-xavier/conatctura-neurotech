@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { User } from '../models/user';
 
 
+
 @Component({
   selector: 'app-form-usuarios',
   templateUrl: './form-usuarios.component.html',
@@ -38,6 +39,17 @@ export class FormUsuariosComponent implements OnInit {
     });
   }
 
+  validation(){
+    console.log('entrou no validation');
+    if(this.formUsers.valid){
+      if(this.user){
+        this.updateUser(this.user);
+      }else{
+        this.save();
+      }
+    }
+  }
+
   limpar(){
     this.formUsers.reset();
   }
@@ -64,6 +76,40 @@ export class FormUsuariosComponent implements OnInit {
         text:'Cadastro não realizado, preencha corretamente todos os campos.'
       });
     }
+  }
+
+  updateUser(user:User){
+    if(this.formUsers.valid && this.user.id != null){
+      user.name = this.formUsers.get('name').value;
+      user.username = this.formUsers.get('username').value;
+      user.admin = this.formUsers.get('admin').value;
+      user.password = this.formUsers.get('password').value;
+      this.usersService.updateUser(user).subscribe(
+        data=>{
+          Swal.fire({
+            icon: 'success',
+            title: 'Eeeeeba...',
+            text:'Usuário criado com sucesso!'
+          });
+          this.router.navigate(['/lista-usuarios']);
+        },
+        error => {
+          Swal.fire({
+            title: 'Ooops!',
+            text: 'Erro ao editar contato',
+            icon: 'error',
+            confirmButtonText: 'Okay'
+          });
+        }
+      );
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Ooooops',
+        text:'Edição não realizada, preencha corretamente todos os campos.'
+      });
+    }
+    
   }
 
 }

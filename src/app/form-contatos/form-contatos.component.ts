@@ -48,6 +48,24 @@ export class FormContatosComponent implements OnInit, OnDestroy {
     this.formContatos.reset();
   }
 
+  validation(){
+    console.log('xablau');
+    if(this.formContatos.valid){
+      if(this.contact){
+        this.updateContact(this.contact);
+      }else{
+        this.save();
+      }
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Ooooops..',
+        text: 'Cadastro não realizado,' +
+        'preencha corretamente todos os campos'
+      });
+    }
+  }
+
   save(){
     
     if(this.formContatos.valid){
@@ -73,10 +91,12 @@ export class FormContatosComponent implements OnInit, OnDestroy {
   }
 
 
-  updateContact(){
+  updateContact(contact: Contacts){
     if(this.formContatos.valid && this.contact.id != null){
-      this.contact = this.formContatos.value;
-      this.contatoService.updateContact(this.contact).subscribe(
+      contact.name =  this.formContatos.get('name').value;
+      contact.phone = this.formContatos.get('phone').value;
+      contact.email =  this.formContatos.get('email').value;
+      this.contatoService.updateContact(contact).subscribe(
         data=>{
           Swal.fire({
             icon: 'success',
