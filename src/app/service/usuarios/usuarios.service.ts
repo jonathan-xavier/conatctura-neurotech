@@ -94,7 +94,7 @@ export class UsuariosService {
   updateUser(user: User){
     const id = user.id;
     const headers = new HttpHeaders({Authorization: 'Basic '+ btoa(this.username + ':' + this.password)});
-    return this.http.put<User>(this.api_url + 'user', user, {headers}).pipe(
+    return this.http.put<User>(this.api_url + 'user/'+ id, user, {headers}).pipe(
       map(
         userData =>{
           if(userData){
