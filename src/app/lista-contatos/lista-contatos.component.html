@@ -5,6 +5,21 @@
   </div>
 </section>
 <!-- Botao de adicionar contato -->
+ 
+<!-- botao para pesquisar -->
+<section class="search-box"> 
+  <input [(ngModel)]="filter" class="search-txt" type="text" name="" placeholder="Buscar por email...">
+  <a class="search-btn" >
+    <mat-icon>search</mat-icon>
+  </a>
+</section>
+<!-- <div class="form-group row">
+  <label for="" class="col-sm-2 col-form-label">Filter By:</label>
+  <div class="col-sm-10">
+     <input [(ngModel)]="filter" class="form-control">
+  </div>
+</div> -->
+
 <section>
   <div class="container-buttons">
     <button  mat-raised-button color="primary" (click)="createContact()">Novo contato</button>
@@ -30,7 +45,7 @@
       </thead>
       <!-- tbody -->
         <tbody>
-          <tr *ngFor = "let contact of contactList">
+          <tr *ngFor = "let contact of filteredContacts">
             <td data-label="Nome">{{contact.name}}</td>
             <td data-label="Nome">{{contact.email}}</td>
             <td data-label="Nome">{{contact.phone}}</td>

@@ -13,8 +13,10 @@ import Swal from 'sweetalert2';
 export class ListaContatosComponent implements OnInit {
 
 
-  contactList: Contacts[];
-  collection = {count:10,data:[]};
+  contactList: Contacts[] = [];
+  filteredContacts: Contacts[] = [];
+  filterBy: string = "";
+  //collection = {count:10,data:[]};
 
   constructor(private router: Router, public contatosService: ContatosService) { }
   
@@ -22,23 +24,56 @@ export class ListaContatosComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.populateContacts();
+    //this.populateContacts();
+    this.getContacts();
     
   }
 
-
-
-  populateContacts(){
-    for(let i = 0; i < this.collection.count; i++){
-      this.collection.data.push({
-        name: 'teste' + i,
-        email: 'email' + i + '@contactura.com',
-        phone: '('+ 0 +8 + 1 + ')' + 9 + i + i + i + i + '-' + i + i + i + i
-      });
-    }
-    console.log(this.collection.data);
-    this.contactList = this.collection.data;
+  getContacts(){
+    this.contatosService.getContatos().subscribe(
+      data =>{
+        this.contactList = data;
+        this.filteredContacts = this.contactList;
+        console.log(data);
+      },
+      error =>
+      {
+        // Swal.fire({
+        //   title: 'Ooops!',
+        //   text: 'Erro ao retornar lista',
+        //   icon: 'error',
+        //   confirmButtonText: 'Okay'
+        // });
+        this.contactList = [];
+        console.log(error);
+      }
+    );
   }
+
+  set filter(value: string){
+    this.filterBy = value;
+    this.filteredContacts = this.contactList.filter((contact: Contacts) =>{
+        return contact.email.toLocaleLowerCase()
+        .indexOf(this.filterBy.toLocaleLowerCase())> -1 });
+        console.log(this.filteredContacts);
+  }
+
+  get filter(){
+    return this.filterBy;
+  }
+
+
+  // populateContacts(){
+  //   for(let i = 0; i < this.collection.count; i++){
+  //     this.collection.data.push({
+  //       name: 'teste' + i,
+  //       email: 'email' + i + '@contactura.com',
+  //       phone: '('+ 0 +8 + 1 + ')' + 9 + i + i + i + i + '-' + i + i + i + i
+  //     });
+  //   }
+  //   console.log(this.collection.data);
+  //   this.contactList = this.collection.data;
+  // }
 
   createContact(){
     
@@ -52,6 +87,7 @@ export class ListaContatosComponent implements OnInit {
     
     console.log('edit está funcionando', contatos);
     this.contatosService.getContactsList(contatos);
+    //this.contatosService.updateContact(contatos);
     this.router.navigate(['/cadastro-contatos']);
   }  
 
@@ -67,11 +103,17 @@ export class ListaContatosComponent implements OnInit {
       cancelButtonText: 'Não'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Deletado com sucesso!'
+        this.contatosService.deleteContacts(contatos.id).subscribe(
+          data =>{
+            Swal.fire(
+              String(data),
+            );
+            this.getContacts();
+          }
         )
+        
       }
-    })
+    });
   }
 
 }

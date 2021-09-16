@@ -9,6 +9,7 @@ import { ListaContatosComponent } from './lista-contatos/lista-contatos.componen
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { FormUsuariosComponent } from './form-usuarios/form-usuarios.component';
 import { FormContatosComponent } from './form-contatos/form-contatos.component';
+import { HttpClientModule } from '@angular/common/http';
 //imports do material design
 import{FormsModule, ReactiveFormsModule}from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
@@ -37,7 +38,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
 
   ],
   providers: [],

@@ -25,9 +25,14 @@
         <input formControlName="phone" type="text" name="nome" class="form-control"> 
       </div>
 
-      <div class="button">
+      <div class="button" [ngStyle]="{'display': contact == null ? 'block': 'none'}">
         <button (click)="save()" mat-raised-button color="primary">Salvar contato</button>
-        <button (click)="resetar()" mat-raised-button color="primary">Limpar</button>
+        <button  class="limpar"  (click)="resetar()" mat-raised-button color="primary">Limpar</button>
+      </div>
+
+      <div class="button" [ngStyle]="{'display': contact !== null ? 'block': 'none'}">
+        <button (click)="updateContact()" mat-raised-button color="primary">editar contato</button>
+        <button  class="limpar"  (click)="resetar()" mat-raised-button color="primary">Limpar</button>
       </div>
 
 

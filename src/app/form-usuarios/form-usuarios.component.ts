@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../service/usuarios/usuarios.service';
 import Swal from 'sweetalert2';
+import { User } from '../models/user';
 
 
 @Component({
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class FormUsuariosComponent implements OnInit {
 
+  user: User = null;
   formUsers = new FormGroup({
     id: new FormControl(''),
     name: new FormControl('',[Validators.required]),
@@ -26,6 +28,7 @@ export class FormUsuariosComponent implements OnInit {
 
     this.usersService.botaoEdit.subscribe(record =>{
       if(record !== null){
+        this.user = record;
         console.log(record, 'valor do record');
         this.formUsers.get('name').setValue(record.name);
         this.formUsers.get('username').setValue(record.username);
@@ -41,12 +44,18 @@ export class FormUsuariosComponent implements OnInit {
 
   save(){
     if(this.formUsers.valid){
-      Swal.fire({
-        icon: 'success',
-        title: 'Eeeeeba...',
-        text:'Usuário criado com sucesso!'
-      });
-      this.router.navigate(['/lista-usuarios']);
+      this.user = this.formUsers.value;
+      this.usersService.createUsers(this.user).subscribe(
+        data =>{
+          Swal.fire({
+            icon: 'success',
+            title: 'Eeeeeba...',
+            text:'Usuário criado com sucesso!'
+          });
+          this.router.navigate(['/lista-usuarios']);
+        }
+      );
+      
       
     }else{
       Swal.fire({

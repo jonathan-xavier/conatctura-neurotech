@@ -4,6 +4,14 @@
     <h1>USUÁRIOS</h1>
   </div>
 </section>
+<!-- botao para pesquisar -->
+<section class="search-box"> 
+  <input [(ngModel)]="filter" class="search-txt" type="text" name="" placeholder="Buscar por nome...">
+  <a class="search-btn" >
+    <mat-icon>search</mat-icon>
+  </a>
+</section>
+
 <!-- Botao de adicionar contato -->
 <section>
   <div class="container-buttons">
@@ -30,7 +38,7 @@
       </thead>
       <!-- tbody -->
         <tbody>
-          <tr *ngFor = "let user of userList">
+          <tr *ngFor = "let user of filteredUsers">
             <td data-label="Nome">{{user.name}}</td>
             <td data-label="Nome">{{user.username}}</td>
             <td data-label="Nome">{{user.admin}}</td>

@@ -55,6 +55,10 @@ button{
   padding: 4px 15px;
 }
 
+.limpar{
+  margin-left: 10px;
+}
+
 @media screen and (max-width: 769px) {
 .container .col-2 {
   display: grid;
@@ -73,9 +77,12 @@ button{
 .button{
   padding-bottom: 20px;
   button{
+    
     padding: 4px 15px;
   }
 }
+
+
 }
 
 
