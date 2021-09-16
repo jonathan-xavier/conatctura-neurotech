@@ -81,7 +81,7 @@ export class UsuariosService {
   //deletar usuario
   deleteUser(id: number){
     const headers = new HttpHeaders({Authorization: 'Basic ' + btoa(this.username + ':' + this.password)});
-    return this.http.delete(this.api_url + 'user/' + id, {headers}).pipe(
+    return this.http.delete(this.api_url + 'user/' + id, {headers, responseType: 'text' as 'text' }).pipe(
       map(
         userData =>{
           return userData;
